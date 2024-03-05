@@ -8,4 +8,5 @@ FROM scratch
 WORKDIR /app
 COPY --from=build /build/out/myiptv .
 COPY web web
+COPY LICENSE web/
 ENTRYPOINT ["/app/myiptv"]

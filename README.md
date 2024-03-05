@@ -42,12 +42,12 @@ services:
 Then open http://your.server.ip:4000/play in your browser
 
 ### Environment Variables (-e)
-| Environment variable | Function                     | default                     |
-| -------------------- | ---------------------------- | --------------------------- |
-| SERVER_PORT          | The port for web page        | 4000                        |
-| PROXY_URL            | URL for your udpxy server    | N/A                         |
-| WEB_HOME_PATH        | Set custom web static folder | /app/web                    |
-| PLAY_LIST_PATH       | Set play list file path      | WEB_HOME_PATH/playlist.m3u" |
+| Environment variable | Function                     | default                    |
+| -------------------- | ---------------------------- | -------------------------- |
+| SERVER_PORT          | The port for web page        | 4000                       |
+| PROXY_URL            | URL for your udpxy server    | N/A                        |
+| WEB_HOME_PATH        | Set custom web static folder | /app/web                   |
+| PLAY_LIST_PATH       | Set play list file path      | WEB_HOME_PATH/playlist.m3u |
 
 ## manually
 Download [mpegts.js](https://github.com/xqq/mpegts.js) and copy it to `web` folder, then copy your play list file to `web` folder an rename to playlist.m3u.
