@@ -1,0 +1,36 @@
+/* dark mode */
+body {
+    background-color: color-mix(in srgb, Canvas, CanvasText 2.5%);
+    color: color-mix(in srgb, CanvasText, Canvas 15%);
+    color-scheme: light dark;
+}
+
+.mainContainer {
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (min-width: 1280px) {
+    .mainContainer {
+        display: block;
+        width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.videoContainer {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.centeredVideo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}

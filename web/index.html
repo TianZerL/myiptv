@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IPTV</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="mainContainer">
+        <div class="videoContainer">
+            <video id="videoElement" class="centeredVideo" controls playsinline>
+                Your browser doesn't support HTML5 video.
+            </video>
+        </div>
+        <div>
+            <select aria-label="channels" id="channelList">
+                <option selected disabled value="">Channel List</option>
+            </select>
+        </div>
+        <div>
+            <img aria-label="channel logo" id="logoElement" width="128px">
+        </div>
+    </div>
+
+    <script type="module" src="setup.js"></script>
+</body>
+
+</html>
