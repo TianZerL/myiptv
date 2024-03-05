@@ -6,10 +6,12 @@ The go server will reverse proxy udpxy and feed your m3u play list to web page, 
 
 # Screenshot
 ![Screenshot](/images/screenshot.png)
+
 # Installation
 ## Docker
 ### images
 your can find images in [DockerHub](https://hub.docker.com/r/tianzer/myiptv)
+
 ### docker cli
 ```shell
 docker run -d \
@@ -21,6 +23,7 @@ docker run -d \
   --restart unless-stopped \
   tianzer/myiptv
 ```
+
 ### docker-compose
 ```docker-compose
 ---
