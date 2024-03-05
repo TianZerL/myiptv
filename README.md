@@ -4,6 +4,8 @@ A simple selfhosted server to watch video stream from udpxy in browser
 # How it work
 The go server will reverse proxy udpxy and feed your m3u play list to web page, then we use [mpegts.js](https://github.com/xqq/mpegts.js) to play the video stream.
 
+# Screenshot
+![Screenshot](/images/screenshot.png)
 # Installation
 ## Docker
 ### images
