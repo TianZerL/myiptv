@@ -23,7 +23,7 @@ func ProxyServer(target string) *httputil.ReverseProxy {
 func main() {
 	config := NewConfig()
 
-	http.HandleFunc("/play/list/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/api/playlist/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		playList := ParseM3U(config.PlayListPath)
 		if playList != nil {
@@ -34,8 +34,9 @@ func main() {
 			json.NewEncoder(w).Encode(Message{"Failed to parse play list file"})
 		}
 	})
-	http.Handle("/play/", http.StripPrefix("/play/", http.FileServer(http.Dir(config.WebHomePath))))
-	http.Handle("/", ProxyServer(config.ProxyUrl))
+	http.Handle("/rtp/", ProxyServer(config.ProxyUrl))
+	http.Handle("/udp/", ProxyServer(config.ProxyUrl))
+	http.Handle("/", http.FileServer(http.Dir(config.WebHomePath)))
 
 	log.Fatal(http.ListenAndServe(":"+config.Port, nil))
 }

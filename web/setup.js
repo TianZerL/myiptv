@@ -34,7 +34,7 @@ function play(url) {
     }
 }
 
-fetchPlayList('list/').then(data => {
+fetchPlayList('/api/playlist/').then(data => {
     for (const channel of data.channels) {
         var option = document.createElement('option');
         option.text = channel.name;

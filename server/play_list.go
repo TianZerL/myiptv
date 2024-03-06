@@ -44,9 +44,9 @@ func ParseM3U(path string) *PlayList {
 			}
 
 		} else if !strings.HasPrefix(line, "#") {
-			idx := strings.LastIndex(line, "/rtp")
+			idx := strings.LastIndex(line, "/rtp/")
 			if idx == -1 {
-				idx = strings.LastIndex(line, "/udp")
+				idx = strings.LastIndex(line, "/udp/")
 			}
 			if idx == -1 {
 				idx = 0
