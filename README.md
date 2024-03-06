@@ -44,7 +44,7 @@ services:
     restart: unless-stopped
 ```
 
-Then open http://your.server.ip:4000/play in your browser
+Then open http://your.server.ip:4000 in your browser
 
 ### Environment Variables (-e)
 | Environment variable | Function                     | default                    |
@@ -64,4 +64,4 @@ go build -o ../
 cd ..
 ./myiptv
 ```
-Then open http://your.server.ip:4000/play in your browser
+Then open http://your.server.ip:4000 in your browser
