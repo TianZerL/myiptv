@@ -55,13 +55,11 @@ Then open http://your.server.ip:4000 in your browser
 | PLAY_LIST_PATH       | Set play list file path      | WEB_HOME_PATH/playlist.m3u |
 
 ## manually
-Download [mpegts.js](https://github.com/xqq/mpegts.js) and copy it to `web` folder, then copy your play list file to `web` folder an rename to playlist.m3u.
-
-then run
+Download [mpegts.js](https://github.com/xqq/mpegts.js) and copy it to `web` folder, then run
 ```shell
 cd server
 go build -o ../
 cd ..
-./myiptv
+./myiptv --PROXY_URL=http://your.udpxy.ip:port --PLAY_LIST_PATH=/path/to/your/playlist/file
 ```
 Then open http://your.server.ip:4000 in your browser

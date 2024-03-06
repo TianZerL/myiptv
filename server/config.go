@@ -1,6 +1,9 @@
 package main
 
-import "os"
+import (
+	"flag"
+	"os"
+)
 
 type Config struct {
 	Port         string
@@ -10,18 +13,16 @@ type Config struct {
 }
 
 func NewConfig() *Config {
-	config := Config{
-		Port:         os.Getenv("SERVER_PORT"),
-		ProxyUrl:     os.Getenv("PROXY_URL"),
-		WebHomePath:  os.Getenv("WEB_HOME_PATH"),
-		PlayListPath: os.Getenv("PLAY_LIST_PATH"),
-	}
+	config := Config{}
+
+	flag.StringVar(&config.Port, "SERVER_PORT", os.Getenv("SERVER_PORT"), "The port for web page")
+	flag.StringVar(&config.ProxyUrl, "PROXY_URL", os.Getenv("PROXY_URL"), "URL for your udpxy server")
+	flag.StringVar(&config.WebHomePath, "WEB_HOME_PATH", os.Getenv("WEB_HOME_PATH"), "Set custom web static folder")
+	flag.StringVar(&config.PlayListPath, "PLAY_LIST_PATH", os.Getenv("PLAY_LIST_PATH"), "Set play list file path")
+	flag.Parse()
 
 	if config.Port == "" {
 		config.Port = "4000"
-	}
-	if config.ProxyUrl == "" {
-		config.ProxyUrl = "http://192.168.1.20:4000"
 	}
 	if config.WebHomePath == "" {
 		config.WebHomePath = "./web"
