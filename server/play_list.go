@@ -4,18 +4,23 @@ import (
 	"bufio"
 	"log"
 	"os"
+	"regexp"
 	"strings"
 )
 
 type Channel struct {
-	Name string `json:"name"`
-	Url  string `json:"url"`
-	Logo string `json:"logo"`
+	Name  string `json:"name"`
+	Url   string `json:"url"`
+	Logo  string `json:"logo"`
+	Group string `json:"group"`
 }
 
 type PlayList struct {
 	Channels []Channel `json:"channels"`
 }
+
+var reLogo = regexp.MustCompile("tvg-logo=\"([^\"]*)\"")
+var reGroup = regexp.MustCompile("group-title=\"([^\"]*)\"")
 
 func ParseM3U(path string) *PlayList {
 	file, err := os.Open(path)
@@ -33,16 +38,9 @@ func ParseM3U(path string) *PlayList {
 		line := scanner.Text()
 		if strings.HasPrefix(line, "#EXTINF") {
 			channel = new(Channel)
-			channel.Name = line[strings.LastIndex(line, ",")+1:]
-
-			tags := strings.Split(line, " ")
-			for _, tag := range tags {
-				if strings.HasPrefix(tag, "tvg-logo") {
-					channel.Logo = tag[10 : len(tag)-1]
-					break
-				}
-			}
-
+			channel.Name = strings.TrimSpace(line[strings.LastIndex(line, ",")+1:])
+			channel.Logo = strings.TrimSpace(reLogo.FindStringSubmatch(line)[1])
+			channel.Group = strings.TrimSpace(reGroup.FindStringSubmatch(line)[1])
 		} else if !strings.HasPrefix(line, "#") {
 			idx := strings.LastIndex(line, "/rtp/")
 			if idx == -1 {
@@ -51,7 +49,7 @@ func ParseM3U(path string) *PlayList {
 			if idx == -1 {
 				idx = 0
 			}
-			channel.Url = line[idx:]
+			channel.Url = strings.TrimSpace(line[idx:])
 			channels = append(channels, *channel)
 		}
 	}

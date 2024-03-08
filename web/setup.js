@@ -2,8 +2,10 @@ import './mpegts.js'
 
 var videoElement = document.getElementById('videoElement');
 var channelListElement = document.getElementById('channelList');
+var groupListElement = document.getElementById('groupList');
 var logoElement = document.getElementById('logoElement');
 
+var groups = { 'all': [] };
 var player = null;
 
 async function fetchPlayList(url) {
@@ -34,17 +36,38 @@ function play(url) {
     }
 }
 
+function setChannelList(channelOptions) {
+    channelListElement.options.length = channelOptions.length + 1
+    for (let i = 0; i < channelOptions.length; i++) {
+        channelListElement.options[i + 1] = channelOptions[i];
+    }
+    channelListElement.options.selectedIndex = 0;
+}
+
 fetchPlayList('/api/playlist/').then(data => {
     for (const channel of data.channels) {
-        var option = document.createElement('option');
-        option.text = channel.name;
-        option.channel = channel;
-        channelListElement.add(option);
+        if (groups[channel.group] == undefined) {
+            let groupOption = document.createElement('option');
+            groupOption.text = channel.group;
+            groupListElement.add(groupOption);
+            groups[channel.group] = [];
+        }
+        let channelOption = document.createElement('option');
+        channelOption.text = channel.name;
+        channelOption.channel = channel;
+        groups[channel.group].push(channelOption);
+        groups['all'].push(channelOption);
     }
+    setChannelList(groups['all'])
 }).catch(err => console.log(err))
 
 channelListElement.addEventListener('change', e => {
-    var option = e.target.options[e.target.selectedIndex];
+    const option = e.target.options[e.target.selectedIndex];
     logoElement.src = option.channel.logo
     play(option.channel.url);
+})
+
+groupListElement.addEventListener('change', e => {
+    const option = e.target.options[e.target.selectedIndex];
+    setChannelList(groups[option.text])
 })
